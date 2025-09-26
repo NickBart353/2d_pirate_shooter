@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="2D_Pirate_Shooter"
-run/main_scene="uid://bx4yk2xwi5b0g"
+run/main_scene="uid://boxxin4a702km"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://boxxin4a702km"]
+
+[ext_resource type="PackedScene" uid="uid://bilafucmh3i64" path="res://player.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bx4yk2xwi5b0g" path="res://map.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node"]
+
+[node name="Map" parent="." instance=ExtResource("2_h2yge")]
+
+[node name="Player" parent="." instance=ExtResource("1_0xm2m")]
