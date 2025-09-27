@@ -3,6 +3,9 @@ extends CharacterBody2D
 @export var speed = 100.0 
 @export var acceleration = 100.0 
 @export var friction = 100.0
+@export var max_line_length = 100
+
+@onready var line_2d = $Line2D
 
 var direction = Vector2.ZERO
 
@@ -25,9 +28,9 @@ func _physics_process(delta: float) -> void:
 			shoot_cannon()
 	
 	move_and_slide()
-	
+
 func charge_cannon():
 	pass
-	
+
 func shoot_cannon():
 	pass

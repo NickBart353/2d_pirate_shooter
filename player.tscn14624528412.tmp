@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bilafucmh3i64"]
+[gd_scene load_steps=10 format=3 uid="uid://bilafucmh3i64"]
 
 [ext_resource type="Script" uid="uid://bohfg6of8hk12" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://thy6ptb3x261" path="res://assets/shop_top.png" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://cvna2kogeummy" path="res://assets/ship_bottom.png" id="3_hqtel"]
 [ext_resource type="Texture2D" uid="uid://ccrx7jjbw3yme" path="res://assets/ripple.png" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://blms0cijt56d6" path="res://line_2d.gd" id="5_sweqy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4flbx"]
 radius = 14.0
@@ -27,7 +28,6 @@ texture_filter = 3
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_onrkg")
-max_line_length = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7, 16)
@@ -57,5 +57,5 @@ texture = ExtResource("2_i3pqv")
 z_index = -5
 texture = ExtResource("3_hqtel")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-8, 30)
+[node name="Line2D" type="Line2D" parent="."]
+script = ExtResource("5_sweqy")
