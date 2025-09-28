@@ -4,9 +4,9 @@ extends CharacterBody2D
 @export var acceleration = 100.0 
 @export var friction = 100.0
 @export var max_line_length = 100
+signal shoot_cannonball(position, target, player)
 
-@onready var line_2d = $Line2D
-
+var ball : PackedScene
 var direction = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
@@ -33,4 +33,4 @@ func charge_cannon():
 	pass
 
 func shoot_cannon():
-	pass
+	shoot_cannonball.emit(global_position, get_global_mouse_position(), self)

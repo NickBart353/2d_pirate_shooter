@@ -17,15 +17,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not is_instance_valid(character):
+	if not is_instance_valid(trail_origin_marker):
 		return
-
-	var global_pos = character.global_position
-	queue.push_front(global_pos)
 	
-	if queue.size() > line_size:
-		queue.pop_back()
-		
-	clear_points()
-	for point in queue:
-		add_point(point)
+	add_point(trail_origin_marker.global_position, 0)
+	
+	if get_point_count() > line_size:
+		remove_point(get_point_count() - 1)

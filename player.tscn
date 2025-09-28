@@ -22,7 +22,7 @@ spread = 4.969
 gravity = Vector3(0, 98, 0)
 color_ramp = SubResource("GradientTexture1D_sweqy")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["players"]]
 texture_filter = 3
 collision_layer = 5
 collision_mask = 5
@@ -58,4 +58,4 @@ z_index = -5
 texture = ExtResource("3_hqtel")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-8, 30)
+position = Vector2(-7, 22)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://boxxin4a702km"]
+[gd_scene load_steps=7 format=3 uid="uid://boxxin4a702km"]
 
 [ext_resource type="PackedScene" uid="uid://bilafucmh3i64" path="res://player.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://b62bvcn05kavi" path="res://main.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dvgpjwedhkdhl" path="res://trail.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bx4yk2xwi5b0g" path="res://map.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://biulx14e0tixt" path="res://HUD.tscn" id="3_h2yge"]
@@ -9,14 +10,17 @@
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
 
 [node name="Main" type="Node"]
+script = ExtResource("1_lquwl")
 
 [node name="Map" parent="." instance=ExtResource("2_h2yge")]
 
-[node name="Trail" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_1bvp3")]
+[node name="Trail" parent="." instance=ExtResource("2_1bvp3")]
 gradient = SubResource("Gradient_1bvp3")
-character = NodePath("../Player")
-line_size = 200
 
 [node name="Player" parent="." instance=ExtResource("1_0xm2m")]
 
 [node name="HUD" parent="." instance=ExtResource("3_h2yge")]
+
+[connection signal="shoot_cannonball" from="Player" to="." method="_on_player_shoot_cannonball"]
+
+[editable path="Player"]

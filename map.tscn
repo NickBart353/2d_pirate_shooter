@@ -36,14 +36,15 @@ color_ramp = SubResource("Gradient_urblq")
 seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_05x41"]
-noise_type = 3
-seed = 8
-frequency = 0.1572
+noise_type = 0
+seed = 13
+frequency = 0.4071
 offset = Vector3(0, 631.58, 0)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gqbix"]
 noise = SubResource("FastNoiseLite_05x41")
 seamless = true
+seamless_blend_skirt = 0.298
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw27f"]
 shader = ExtResource("1_p5pve")
@@ -51,11 +52,11 @@ shader_parameter/noise1 = SubResource("NoiseTexture2D_71pa8")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_gqbix")
 shader_parameter/scroll1 = Vector2(-0.01, -0.01)
 shader_parameter/scroll2 = Vector2(0.01, -0.01)
-shader_parameter/distortion_strength = 0.029000048877499962
+shader_parameter/distortion_strength = 0.02800004883000007
 shader_parameter/tone_color = Color(0.039215688, 0.6862745, 1, 1)
 shader_parameter/top_color = Color(1, 1, 1, 1)
-shader_parameter/light_start = 0.366000017385
-shader_parameter/light_end = 0.886000042085
+shader_parameter/light_start = 0.442000020995
+shader_parameter/light_end = 1.0
 shader_parameter/pixel_size = Vector2(1920, 1080)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p5pve"]
