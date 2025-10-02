@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://biulx14e0tixt"]
+[gd_scene load_steps=2 format=3 uid="uid://biulx14e0tixt"]
+
+[ext_resource type="Texture2D" uid="uid://dqsyo4tv2quex" path="res://assets/cannonball.png" id="1_k5de2"]
 
 [node name="HUD" type="Node"]
+
+[node name="Cannonball3" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+scale = Vector2(4, 4)
+texture = ExtResource("1_k5de2")
+
+[node name="Cannonball4" type="Sprite2D" parent="."]
+position = Vector2(16, 52)
+scale = Vector2(4, 4)
+texture = ExtResource("1_k5de2")
+
+[node name="Cannonball5" type="Sprite2D" parent="."]
+position = Vector2(16, 88)
+scale = Vector2(4, 4)
+texture = ExtResource("1_k5de2")

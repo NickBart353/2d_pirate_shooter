@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="2D_Pirate_Shooter"
-run/main_scene="uid://boxxin4a702km"
+run/main_scene="uid://ddl3vf6qxct3m"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -25,6 +25,11 @@ window/size/borderless=true
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+
+[global_group]
+
+players=""
+terrain=""
 
 [input]
 

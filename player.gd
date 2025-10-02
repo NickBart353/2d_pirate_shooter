@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var max_line_length = 100
 @export var cannonball_scene : PackedScene
 @export var canon_scene : PackedScene
+@export var hud_scene : PackedScene
 signal shoot_cannonball(position, target, player, shooting_dir, charge)
 signal rotate_player_canon(mousepos, player_pos)
 signal charge_player_canon(charge, charging_dir, player_pos)
@@ -23,9 +24,8 @@ var charging : bool = false
 var shooting_dir
 
 func _ready():
-	canon = canon_scene.instantiate()
-	#add_child(canon)
-	canon.position.x += 25
+	var hud = hud_scene.instantiate()
+	add_child(hud)
 
 func _physics_process(delta: float) -> void:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
