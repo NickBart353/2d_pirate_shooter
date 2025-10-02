@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdmdi2nsm0f0v"]
+
+[ext_resource type="Texture2D" uid="uid://d33ir3swxi18m" path="res://assets/canon.png" id="1_hrr58"]
+
+[node name="Canon" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.5707964
+texture = ExtResource("1_hrr58")

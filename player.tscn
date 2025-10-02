@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bilafucmh3i64"]
+[gd_scene load_steps=11 format=3 uid="uid://bilafucmh3i64"]
 
 [ext_resource type="Script" uid="uid://bohfg6of8hk12" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://thy6ptb3x261" path="res://assets/shop_top.png" id="2_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://ckytc5egut87r" path="res://cannonball.tscn" id="2_sweqy"]
+[ext_resource type="PackedScene" uid="uid://cdmdi2nsm0f0v" path="res://canon.tscn" id="3_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://cvna2kogeummy" path="res://assets/ship_bottom.png" id="3_hqtel"]
 [ext_resource type="Texture2D" uid="uid://ccrx7jjbw3yme" path="res://assets/ripple.png" id="4_hqtel"]
 
@@ -30,6 +31,7 @@ collision_mask = 5
 script = ExtResource("1_onrkg")
 max_line_length = 300
 cannonball_scene = ExtResource("2_sweqy")
+canon_scene = ExtResource("3_2hs0m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7, 16)
