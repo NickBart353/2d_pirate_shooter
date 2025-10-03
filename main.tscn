@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://boxxin4a702km"]
+[gd_scene load_steps=7 format=3 uid="uid://boxxin4a702km"]
 
 [ext_resource type="PackedScene" uid="uid://bilafucmh3i64" path="res://player.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://b62bvcn05kavi" path="res://main.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://ckytc5egut87r" path="res://cannonball.tscn" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://cdmdi2nsm0f0v" path="res://canon.tscn" id="3_272bh"]
 [ext_resource type="Texture2D" uid="uid://30urkm7fb8fu" path="res://assets/target.png" id="8_5vw27"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lquwl"]
+properties/0/path = NodePath("Player:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Player_Instance" type="Node"]
 script = ExtResource("1_lquwl")
@@ -17,6 +22,9 @@ position = Vector2(-25, -15)
 [node name="Target" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("8_5vw27")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lquwl")
 
 [connection signal="charge_player_canon" from="Player" to="." method="_on_player_charge_player_canon"]
 [connection signal="rotate_player_canon" from="Player" to="." method="_on_player_rotate_player_canon"]

@@ -11,19 +11,20 @@ config_version=5
 [application]
 
 config/name="2D_Pirate_Shooter"
-run/main_scene="uid://ddl3vf6qxct3m"
+run/main_scene="uid://fpgqksynhkmf"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+NetworkHandler="*res://scripts/network_handler.gd"
+
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/size/mode=3
-window/size/resizable=false
-window/size/borderless=true
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
 [global_group]

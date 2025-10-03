@@ -1,15 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://ddl3vf6qxct3m"]
 
 [ext_resource type="PackedScene" uid="uid://bx4yk2xwi5b0g" path="res://map.tscn" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://boxxin4a702km" path="res://main.tscn" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://bdddvdmiei6c6" path="res://scripts/multiplayer_spawner.gd" id="3_feb5d"]
-[ext_resource type="PackedScene" uid="uid://bilafucmh3i64" path="res://player.tscn" id="4_fc0e3"]
 
 [node name="Game" type="Node"]
 
 [node name="Map" parent="." instance=ExtResource("1_e2o6t")]
 
+[node name="Player_Instance" parent="." instance=ExtResource("2_feb5d")]
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://bilafucmh3i64")
+_spawnable_scenes = PackedStringArray("uid://boxxin4a702km")
 spawn_path = NodePath("..")
 script = ExtResource("3_feb5d")
-network_player = ExtResource("4_fc0e3")
+network_player = ExtResource("2_feb5d")

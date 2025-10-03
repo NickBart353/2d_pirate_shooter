@@ -5,11 +5,11 @@ extends CharacterBody2D
 @export var friction = 100.0
 @export var max_line_length = 100
 @export var cannonball_scene : PackedScene
-@export var canon_scene : PackedScene
+@export var cannon_scene : PackedScene
 @export var hud_scene : PackedScene
 signal shoot_cannonball(position, target, player, shooting_dir, charge)
-signal rotate_player_canon(mousepos, player_pos)
-signal charge_player_canon(charge, charging_dir, player_pos)
+signal rotate_player_cannon(mousepos, player_pos)
+signal charge_player_cannon(charge, charging_dir, player_pos)
 
 var charge_max = 200
 var charge_start = 50
@@ -19,16 +19,23 @@ var max_ammo = 3
 var current_ammo = max_ammo
 var direction = Vector2.ZERO
 var current_position = Vector2.ZERO
-var canon
+var cannon
 var charging : bool = false
 var shooting_dir
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
 func _ready():
-	var hud = hud_scene.instantiate()
-	add_child(hud)
+	cannon = cannon_scene.instantiate()
+	add_child(cannon)
+	#var hud = hud_scene.instantiate()
+	#add_child(hud)
 
 func _physics_process(delta: float) -> void:
+	if !is_multiplayer_authority(): return
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
+	$Camera2D.make_current()
 
 	if direction.x != 0:
 		$Ship_top.flip_h = direction.x < 0
@@ -45,11 +52,11 @@ func _physics_process(delta: float) -> void:
 		shoot_cannon()
 	
 	if Input.is_action_pressed("shoot"):
-		charge_canon(delta)
+		charge_cannon(delta)
 		
-	rotate_canon()
+	rotate_cannon()
 
-func charge_canon(delta):
+func charge_cannon(delta):
 	if charging == false:
 		shooting_dir = global_position.direction_to(get_global_mouse_position())
 		charge_current = 50
@@ -59,7 +66,7 @@ func charge_canon(delta):
 	elif current_ammo == 0:
 		# play error sound
 		return
-	charge_player_canon.emit(charge_current, shooting_dir, global_position)
+	charge_player_cannon.emit(charge_current, shooting_dir, global_position)
 
 func shoot_cannon():
 	shoot_cannonball.emit(global_position, get_global_mouse_position(), self, shooting_dir, charge_current)
@@ -67,5 +74,8 @@ func shoot_cannon():
 	charge_current = -1
 	shooting_dir = 0
 
-func rotate_canon():
-	rotate_player_canon.emit(get_global_mouse_position(), global_position)
+func rotate_cannon():
+	#rotate_player_cannon.emit(get_global_mouse_position(), global_position)
+	var dir_vec = global_position.direction_to(get_global_mouse_position())
+	cannon.global_position = global_position + (dir_vec * 25) 
+	cannon.look_at(get_global_mouse_position())
