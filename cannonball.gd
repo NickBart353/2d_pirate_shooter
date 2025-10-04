@@ -16,13 +16,14 @@ func _ready():
 func _physics_process(delta):
 	if self.position == target:
 		queue_free()
-	
+
 	bodies = get_overlapping_bodies()
 	for body in bodies:
-		if body.is_in_group("players") and body != player:
+		
+		if body.is_in_group("players") and body.name != player.name:
 			hit.emit(body)
 			#body.queue_free()
-			continue
+			queue_free()
 		if body.is_in_group("terrain"):
 			queue_free()
 			continue

@@ -75,7 +75,14 @@ func shoot_cannon():
 	shooting_dir = 0
 
 func rotate_cannon():
-	#rotate_player_cannon.emit(get_global_mouse_position(), global_position)
 	var dir_vec = global_position.direction_to(get_global_mouse_position())
 	cannon.global_position = global_position + (dir_vec * 25) 
 	cannon.look_at(get_global_mouse_position())
+
+func _on_bullet_hit(body):
+	if body.name == name:
+		print("test")
+		print($Camera2D/ProgressBar.value)
+		$Camera2D/ProgressBar.value -=1
+		if $Camera2D/ProgressBar.value == 0:
+			get_tree().quit()

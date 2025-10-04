@@ -10,5 +10,7 @@ func spawn_player(id: int) -> void:
 	
 	var player : Node = network_player.instantiate()
 	player.name = str(id)
+	player.position.x = id*10
+	player.position.y = id*10
 	
 	get_node(spawn_path).call_deferred("add_child", player)
