@@ -1,8 +1,5 @@
 extends Control
 
-
-
-
 func _on_exit_pressed() -> void:
 	get_tree().quit()
 
@@ -13,5 +10,3 @@ func _on_start_client_pressed() -> void:
 func _on_start_server_pressed() -> void:
 	NetworkHandler.start_server()
 	get_tree().change_scene_to_file("res://game.tscn")
-	#get_tree().change_scene_to_file("res://scenes/server.tscn")
-	#ADD SERVER NODE, MAKE A SERVER SCRIPT TO HANDLE CHANGE OF EVENTS LIKE HEALTH
