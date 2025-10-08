@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export var speed = 100.0 
@@ -22,6 +23,10 @@ var current_position = Vector2.ZERO
 var cannon
 var charging : bool = false
 var shooting_dir
+var max_health = 3
+var min_health = 1
+var cur_health
+
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
@@ -29,6 +34,7 @@ func _enter_tree() -> void:
 func _ready():
 	cannon = cannon_scene.instantiate()
 	add_child(cannon)
+	cur_health = max_health
 	#var hud = hud_scene.instantiate()
 	#add_child(hud)
 
@@ -80,9 +86,7 @@ func rotate_cannon():
 	cannon.look_at(get_global_mouse_position())
 
 func _on_bullet_hit(body):
-	if body.name == name:
-		print("test")
-		print($Camera2D/ProgressBar.value)
-		$Camera2D/ProgressBar.value -=1
+	if body.name == self.name: 
+		$Camera2D/ProgressBar.value -= 1 
 		if $Camera2D/ProgressBar.value == 0:
-			get_tree().quit()
+			NetworkHandler.disconnect_player(self.name)

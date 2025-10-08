@@ -66,6 +66,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_dw050")
 max_value = 3.0
 step = 1.0
 value = 3.0
+rounded = true
+allow_greater = true
+allow_lesser = true
 show_percentage = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
