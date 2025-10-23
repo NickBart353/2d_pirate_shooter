@@ -17,12 +17,15 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-NetworkHandler="*res://scripts/network_handler.gd"
+NetworkHandler="res://scripts/network_handler.gd"
+EventBus="*res://scripts/EventBus.gd"
+network_manager="*res://scripts/network/network_manager.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/always_on_top=true
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"

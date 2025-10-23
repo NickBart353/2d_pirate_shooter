@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddl3vf6qxct3m"]
+
+[ext_resource type="PackedScene" uid="uid://bx4yk2xwi5b0g" path="res://map.tscn" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://spg7woqcu5fp" path="res://scripts/game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://ckytc5egut87r" path="res://cannonball.tscn" id="2_7jktm"]
+[ext_resource type="PackedScene" uid="uid://bilafucmh3i64" path="res://player.tscn" id="4_fc0e3"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_fc0e3")
+cannonball_scene = ExtResource("2_7jktm")
+player_scene = ExtResource("4_fc0e3")
+
+[node name="Map" parent="." instance=ExtResource("1_e2o6t")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bilafucmh3i64", "uid://ckytc5egut87r")
+spawn_path = NodePath("../Players")
+
+[node name="Players" type="Node2D" parent="."]
+
+[editable path="Map"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddl3vf6qxct3m"]
+
+[ext_resource type="PackedScene" uid="uid://bx4yk2xwi5b0g" path="res://map.tscn" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://spg7woqcu5fp" path="res://scripts/game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://ckytc5egut87r" path="res://scenes/cannonball.tscn" id="2_7jktm"]
+[ext_resource type="PackedScene" uid="uid://bilafucmh3i64" path="res://scenes/player.tscn" id="4_fc0e3"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_fc0e3")
+cannonball_scene = ExtResource("2_7jktm")
+player_scene = ExtResource("4_fc0e3")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bilafucmh3i64")
+spawn_path = NodePath("../SpawnPath")
+
+[node name="Map" parent="." instance=ExtResource("1_e2o6t")]
+
+[node name="SpawnPath" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_left = -0.096
+anchor_top = 0.003
+anchor_right = -0.096
+anchor_bottom = 0.003
+offset_left = 869.88
+offset_top = 245.84
+offset_right = 909.88
+offset_bottom = 285.84
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = -139.0
+offset_top = -148.0
+offset_right = -99.0
+offset_bottom = -108.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 2.0
+offset_right = 95.0
+offset_bottom = 42.0
+
+[node name="MainMenu" type="Button" parent="Control/Panel/HBoxContainer"]
+layout_mode = 2
+text = "Main_Menu"
+
+[connection signal="pressed" from="Control/Panel/HBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+
+[editable path="Map"]

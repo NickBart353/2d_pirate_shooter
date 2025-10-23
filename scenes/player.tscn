@@ -1,0 +1,134 @@
+[gd_scene load_steps=19 format=3 uid="uid://bilafucmh3i64"]
+
+[ext_resource type="Script" uid="uid://bohfg6of8hk12" path="res://scripts/player.gd" id="1_smehm"]
+[ext_resource type="PackedScene" uid="uid://ckytc5egut87r" path="res://scenes/cannonball.tscn" id="2_ur7pv"]
+[ext_resource type="PackedScene" uid="uid://cdmdi2nsm0f0v" path="res://scenes/canon.tscn" id="3_y4r1p"]
+[ext_resource type="PackedScene" uid="uid://biulx14e0tixt" path="res://HUD.tscn" id="4_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://ccrx7jjbw3yme" path="res://assets/ripple.png" id="6_jej6c"]
+[ext_resource type="Texture2D" uid="uid://thy6ptb3x261" path="res://assets/shop_top.png" id="7_f1ej7"]
+[ext_resource type="Texture2D" uid="uid://cvna2kogeummy" path="res://assets/ship_bottom.png" id="8_oprun"]
+[ext_resource type="Script" uid="uid://daki7rh17xwyf" path="res://scripts/player_input.gd" id="9_ur7pv"]
+[ext_resource type="Script" uid="uid://b3agpxos6sdcp" path="res://scripts/cannon.gd" id="9_y4r1p"]
+[ext_resource type="PackedScene" uid="uid://db1jrkss747bj" path="res://scenes/target.tscn" id="10_y4r1p"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_smehm"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jxqw"]
+bg_color = Color(0.8392157, 0.101960786, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dw050"]
+bg_color = Color(0, 1, 0.36078432, 1)
+
+[sub_resource type="Gradient" id="Gradient_hqtel"]
+offsets = PackedFloat32Array(0, 0.993007, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.44270328, 0.44270328, 0.44270328, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sweqy"]
+gradient = SubResource("Gradient_hqtel")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i3pqv"]
+particle_flag_disable_z = true
+spread = 4.969
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_sweqy")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
+radius = 9.0
+height = 36.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ur7pv"]
+properties/0/path = NodePath(".:input_dir")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_input", "input_synchronizer") groups=["players"]]
+texture_filter = 3
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_smehm")
+max_line_length = 300
+cannonball_scene = ExtResource("2_ur7pv")
+cannon_scene = ExtResource("3_y4r1p")
+hud_scene = ExtResource("4_d2wvv")
+player_input = NodePath("PlayerInput")
+input_synchronizer = NodePath("PlayerInput/InputSynchronizer")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_smehm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-7, 16)
+ignore_rotation = false
+zoom = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D"]
+offset_left = -25.0
+offset_top = 19.0
+offset_right = 31.0
+offset_bottom = 24.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1jxqw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dw050")
+max_value = 3.0
+step = 1.0
+value = 3.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+show_percentage = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-7, 18)
+emitting = false
+texture = ExtResource("6_jej6c")
+lifetime = 1.07
+speed_scale = 0.87
+process_material = SubResource("ParticleProcessMaterial_i3pqv")
+
+[node name="Ship_top" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("7_f1ej7")
+
+[node name="Ship_bottom" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(0, -2)
+texture = ExtResource("8_oprun")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 20)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_2hs0m")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-7, 21)
+
+[node name="PlayerInput" type="Node2D" parent="."]
+script = ExtResource("9_ur7pv")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="PlayerInput"]
+replication_config = SubResource("SceneReplicationConfig_ur7pv")
+
+[node name="Canon" parent="." node_paths=PackedStringArray("player_input", "cannonball_spawn_path", "target_path") instance=ExtResource("3_y4r1p")]
+script = ExtResource("9_y4r1p")
+player_input = NodePath("../PlayerInput")
+cannonball = ExtResource("2_ur7pv")
+target = ExtResource("10_y4r1p")
+cannonball_spawn_path = NodePath("../Cannonballs")
+target_path = NodePath("../Target")
+
+[node name="CannonballSpawner" type="MultiplayerSpawner" parent="Canon"]
+_spawnable_scenes = PackedStringArray("uid://ckytc5egut87r")
+spawn_path = NodePath("../../Cannonballs")
+
+[node name="TargetSpawner" type="MultiplayerSpawner" parent="Canon"]
+_spawnable_scenes = PackedStringArray("uid://db1jrkss747bj")
+spawn_path = NodePath("../../Target")
+
+[node name="Cannonballs" type="Node2D" parent="."]
+top_level = true
+
+[node name="Target" type="Node2D" parent="."]

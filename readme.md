@@ -17,11 +17,11 @@ A library for noise functions in visual shaders.
     * `result (float)` - The resulting noise value at `uvw + offset`
 * \[VoronoiNoise3D] Voronoi/Worley noise (aka cellular noise), written from scratch, similar outputs to godot's `FastNoiseLite` `Cellular` mode.
   * Inputs (usage similar to `Cellular` mode)
-    * `uvw (vec3)` - XYZ texture coordinates
-    * `offset (vec3)` - Same as UVW, added
-    * `scale (vec3)` - The scale of the noise, higher is smaller
-    * `distance scale (float)` - A float which scales the distance, this has a similar effect as multiplying the output distance and distance2 values.
-    * `distance function (int [enum])` - An enum indicating which distance function to use, note: currently no dropdown to select the mode. I'm not sure if this is possible and can't look it up since I don't have internet right now.
+	* `uvw (vec3)` - XYZ texture coordinates
+	* `offset (vec3)` - Same as UVW, added
+	* `scale (vec3)` - The scale of the noise, higher is smaller
+	* `distance scale (float)` - A float which scales the distance, this has a similar effect as multiplying the output distance and distance2 values.
+	* `distance function (int [enum])` - An enum indicating which distance function to use, note: currently no dropdown to select the mode. I'm not sure if this is possible and can't look it up since I don't have internet right now.
       * `0` - Euclidean
       * `1` - Euclidean squared
       * `2` - Manhattan
@@ -29,16 +29,16 @@ A library for noise functions in visual shaders.
     * `jitter (float)` - The randomness of the noise, recommended between 0 and 1, negative values are supported
     * `3d (bool)` - Whether the noise is 3D, `w` from `uvw` has no effect when `3d` is `false`.
   * Outputs (between 0 and 1, clamped)
-    * `cell value (float)` - A random value for the cell the `uvw + offset` is closest to. The values of the points are consistent, just like with godot's noise
-    * `distance (float)` - The distance to the closest cell, creates a pattern with black dots
-    * `distance2 (float)` - The distance to the second-closest cell, creates a pattern with black "scratches" or "stars"
+	* `cell value (float)` - A random value for the cell the `uvw + offset` is closest to. The values of the points are consistent, just like with godot's noise
+	* `distance (float)` - The distance to the closest cell, creates a pattern with black dots
+	* `distance2 (float)` - The distance to the second-closest cell, creates a pattern with black "scratches" or "stars"
 * \[PixelNoise3D] Random value per "pixel", pixels are scaled
   * Inputs
-    * `uvw (vec3)` - XYZ texture coordinates
-    * `offset (vec3)` - Same as UVW, added
-    * `scale (vec3)` - The scale of the noise, (1., 1., 1.) would mean one value per whole number. (10., 10., 10.) would mean 10 values per whole number on each axis.
+	* `uvw (vec3)` - XYZ texture coordinates
+	* `offset (vec3)` - Same as UVW, added
+	* `scale (vec3)` - The scale of the noise, (1., 1., 1.) would mean one value per whole number. (10., 10., 10.) would mean 10 values per whole number on each axis.
   * Outputs (between 0 and 1)
-    * `noise (float)` - The resulting noise value at `uvw + offset`
+	* `noise (float)` - The resulting noise value at `uvw + offset`
 
 Note:  
 VoronoiNoise3D with `jitter` at 0, using the `cell value` output looks like pixel noise, however, it is less efficient to calculate, if you need tv-static like noise, use `PixelNoise3D`.
