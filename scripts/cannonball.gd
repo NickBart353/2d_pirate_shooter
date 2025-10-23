@@ -31,7 +31,7 @@ func move_cannonball(delta):
 	for body in bodies:
 		if body.is_in_group("players") and body.name != player.name:
 			hit.emit(body)
-			EventBus.player_hit.emit(body.name)
+			EventBus.player_hit.emit(body.name, player)
 			#EventBus.increase_player_score.emit(player.name) INCREASING PLAYER SCORE
 			queue_free()
 			continue

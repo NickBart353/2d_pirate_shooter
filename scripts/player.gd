@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+@onready var game = get_parent().get_parent()
+
 @export var player_id := 1:
 	set(id):
 		player_id = id
@@ -17,6 +19,8 @@ extends CharacterBody2D
 @export var player_input : PlayerInput
 @export var input_synchronizer : MultiplayerSynchronizer
 
+var deaths
+var score
 var charge_max = 200
 var charge_start = 50
 var charge_current = -1
@@ -43,7 +47,9 @@ func _ready():
 	#cannon = cannon_scene.instantiate()
 	#add_child(cannon)
 	cur_health = max_health
-	
+	score = 0
+	deaths = 0
+	$Camera2D/ProgressBar.value = cur_health
 	EventBus.player_hit.connect(_on_bullet_hit_player.rpc)
 	
 	input_synchronizer.set_visibility_for(1, true)
@@ -92,11 +98,12 @@ func rotate_cannon():
 	#cannon.look_at(get_global_mouse_position())
 	
 @rpc("any_peer", "call_local")
-func _on_bullet_hit_player(name):
-	if name == self.name: 
-		$Camera2D/ProgressBar.value -= 1 
-		if $Camera2D/ProgressBar.value == 0:
-			print("player " , self.name, " is dead!")
+func _on_bullet_hit_player(hit_name, hitter):
+	if hit_name == self.name: 
+		cur_health -= 1
+		self.update_healthbar()
+		if $Camera2D/ProgressBar.value < min_health:
+			game.respawn_player.emit(self, hitter)
 
 func move_player(delta):
 	direction = player_input.input_dir
@@ -104,3 +111,6 @@ func move_player(delta):
 		velocity = velocity.move_toward(direction * speed, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+
+func update_healthbar():
+	$Camera2D/ProgressBar.value = cur_health
